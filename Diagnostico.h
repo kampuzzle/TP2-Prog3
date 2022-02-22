@@ -1,0 +1,4 @@
+class Diagnostico{
+    private:
+        
+}
