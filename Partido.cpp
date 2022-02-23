@@ -1,5 +1,6 @@
 #include "Partido.h"
 #include <cstdio>
+#include <list>
 
 Partido::Partido(int numero_partido, int votos_legenda, string nome_partido, string sigla_partido){
     this->numero_partido = numero_partido;
