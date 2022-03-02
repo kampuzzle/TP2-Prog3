@@ -13,10 +13,20 @@ Candidato::Candidato(int numero, int votos_nominais,const string& situacao,const
 	this->numero_partido = numero_partido;
 }
 
+int Candidato::eleito(){
+	if(this->situacao.compare("Eleito") == 0){
+		return 1;
+	}
+	return 0;
+}
+
+void set_partido(list<Partido> partidos){
+	
+}
 
 void Candidato::print()const{
     //pegar sigla partido
     if(this->votos_nominais <= 1){
-        cout << this->nome;
+        cout << this->nome << endl;
     }
 }
