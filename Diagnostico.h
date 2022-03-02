@@ -26,6 +26,9 @@ public:
     int num_vagas();
     void print_questao_1();
     void candidatos_eleitos();
+    void candidatos_mais_votados();
+    void candidatos_nao_eleitos();
+    void nao_deviam_ser_eleitos();
     //~Diagnostico(); 
 };
 

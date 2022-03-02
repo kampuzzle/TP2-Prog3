@@ -68,7 +68,41 @@ void Diagnostico::print_questao_1(){
 void Diagnostico::candidatos_eleitos(){
     for(auto c: this->candidatos){
         if(c->eleito() == 1){
-            
+            c->print();
         }
     }
 }
+
+void Diagnostico::candidatos_mais_votados(){
+    int vagas = num_vagas();
+    int contador = 0;
+
+    for(auto c: this->candidatos){
+        if(contador < vagas){
+            cout << contador + 1 << " - ";
+            c->print();
+        }
+        contador++;
+    }
+}
+
+void Diagnostico::candidatos_nao_eleitos(){
+    int vagas = num_vagas();
+    int contador = 0;
+
+    cout << "\nTeriam sido eleitos se a votação fosse majoritária, e não foram eleitos:\n(com sua posição no ranking de mais votados)" << endl;
+
+    for(auto c: this->candidatos){
+        if(contador > vagas){
+            if(c->eleito() == 1){
+                cout << contador + 1 << " - ";
+                c->print();
+            }          
+        }
+        contador++;
+    }
+}
+
+// void Diagnostico::nao_deviam_ser_eleitos(){
+    
+// }

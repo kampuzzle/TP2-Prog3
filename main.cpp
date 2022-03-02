@@ -12,6 +12,11 @@ int main () {
     diagnostico->le_arquivo_partidos("partidos.csv");
     diagnostico->set_partidos_candidatos();
     diagnostico->print_questao_1();
+    diagnostico->candidatos_eleitos();  
+    // PRECISA DA ORDENAÇÃO PRA FUNCIONAR DIREITO
+    diagnostico->candidatos_mais_votados();
+    // PRECISA DA ORDENAÇÃO PRA FUNCIONAR DIREITO
+    diagnostico->candidatos_nao_eleitos();
     
     
 }
