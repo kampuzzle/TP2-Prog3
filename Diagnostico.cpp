@@ -93,7 +93,7 @@ void Diagnostico::candidatos_nao_eleitos(){
     cout << "\nTeriam sido eleitos se a votação fosse majoritária, e não foram eleitos:\n(com sua posição no ranking de mais votados)" << endl;
 
     for(auto c: this->candidatos){
-        if(contador > vagas){
+        if(contador < vagas){
             if(c->eleito() == 1){
                 cout << contador + 1 << " - ";
                 c->print();
@@ -103,6 +103,21 @@ void Diagnostico::candidatos_nao_eleitos(){
     }
 }
 
-// void Diagnostico::nao_deviam_ser_eleitos(){
-    
-// }
+void Diagnostico::nao_deviam_ser_eleitos(){
+    int vagas = num_vagas();
+    int contador = 0;
+
+    cout << "\nEleitos, que se beneficiaram do sistema proporcional:\n(com sua posição no ranking de mais votados)" << endl;
+
+    for(auto c: this->candidatos){
+        if(contador < vagas){
+        
+        }else{
+            if(c->eleito() == 1){
+                cout << contador+1 << " - ";
+                c->print();
+            }
+        }
+        contador++;
+    }
+}
