@@ -20,6 +20,10 @@ class Partido{
 
     public:
         Partido(int numero_partido, int votos_legenda,const string& nome_partido, const string& sigla_partido);
+        
+        int get_numero_partido() const;
+        string get_sigla() const;
+        void print() const;
 
         /*void set_candidatos( const vector<Candidato*>& candidato);
 
@@ -28,14 +32,14 @@ class Partido{
         double calcula_porcentagem(int totais, int part) const;
         ??? vector<Candidato*> get_candidatos() const;
         int get_votos_legenda() const;
-        int get_numero_partido() const;
+        
         const string& get_sigla_partido() const;
         const string& get_nome_partido() const;
         int get_qtd_votos() const;
         int get_qtd_eleitos() const;
         void set_qtd_votos(int qtd);
 
-        void print() const;
+        
 
         ~Partido();*/
 };

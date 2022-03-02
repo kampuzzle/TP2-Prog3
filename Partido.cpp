@@ -9,3 +9,14 @@ Partido::Partido(int numero_partido, int votos_legenda,const string& nome_partid
 	this->qtd_eleitos = 0;
 }
 
+int Partido::get_numero_partido() const{
+	return this->numero_partido;
+}
+
+string Partido::get_sigla() const{
+	return this->sigla_partido;
+}
+
+void Partido::print() const{
+	cout << this->nome_partido << endl;
+}

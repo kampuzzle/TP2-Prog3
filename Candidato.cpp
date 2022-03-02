@@ -20,13 +20,29 @@ int Candidato::eleito(){
 	return 0;
 }
 
-void set_partido(list<Partido> partidos){
-	
+void Candidato::set_partido(vector<Partido*> partidos){
+	// for(auto p: partidos){
+	// 	if(this->numero_partido == p.get_numero_partido()){
+	// 		this->partido = p;
+	// 		this->partido->print();
+	// 	}
+	// }
+
+	//COM WARNING
+	for(int i = 0; i < partidos.size(); i++){
+		if(this->numero_partido == partidos[i]->get_numero_partido()){
+			this->partido = partidos[i];
+		}
+	}
 }
 
 void Candidato::print()const{
-    //pegar sigla partido
-    if(this->votos_nominais <= 1){
-        cout << this->nome << endl;
-    }
+	string siglaPartido = this->partido->get_sigla();
+		
+	if(votos_nominais<=1){
+		cout << nome << " / " << nome_urna << " (" << siglaPartido << ", " << votos_nominais << " voto)" << endl;
+	}
+	else{
+		cout << nome << " / " << nome_urna << " (" << siglaPartido << ", " << votos_nominais << " votos)" << endl;
+	}
 }

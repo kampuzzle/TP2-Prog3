@@ -43,3 +43,32 @@ void Diagnostico::le_arquivo_partidos(string file){
 
 	in.close();
 }
+
+void Diagnostico::set_partidos_candidatos(){
+    for(auto c: this->candidatos){
+        c->set_partido(this->partidos);
+    }
+}
+
+int Diagnostico::num_vagas(){
+    int vagas=0;
+    for(auto c: this->candidatos){
+        if(c->eleito() == 1){
+            vagas++;
+        }
+    }
+
+    return vagas;
+}
+
+void Diagnostico::print_questao_1(){
+    cout << "Número de vagas: " << num_vagas() << endl;
+}
+
+void Diagnostico::candidatos_eleitos(){
+    for(auto c: this->candidatos){
+        if(c->eleito() == 1){
+            
+        }
+    }
+}

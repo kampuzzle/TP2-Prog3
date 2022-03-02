@@ -22,6 +22,10 @@ public:
     //utility class em c++
     void le_arquivo_candidatos(string file); 
     void le_arquivo_partidos(string file); 
+    void set_partidos_candidatos();
+    int num_vagas();
+    void print_questao_1();
+    void candidatos_eleitos();
     //~Diagnostico(); 
 };
 

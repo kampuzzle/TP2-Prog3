@@ -26,7 +26,7 @@ class Candidato{
         Candidato(int numero, int votos_nominais,const string& situacao,const string& nome,const string& nome_urna, char sexo,const string& data_nasc,const string& destino_voto, int numero_partido);
 
         int eleito();
-        void set_partido(list<Partido> partidos);
+        void set_partido(vector<Partido*> partidos);
         //void calcula_idade(LocalDate data_eleicao);
         //LocalDate get_data_nasc() const;
         /*Partido* get_partido();
