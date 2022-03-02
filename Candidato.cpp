@@ -1,6 +1,6 @@
 #include "Candidato.h"
 
-Candidato::Candidato(int numero, int votos_nominais,string situacao, string nome, string nome_urna, char sexo, string data_nasc,string destino_voto, int numero_partido){
+Candidato::Candidato(int numero, int votos_nominais,const string& situacao,const string& nome,const string& nome_urna, char sexo,const string& data_nasc,const string& destino_voto, int numero_partido){
     this->numero = numero;
 	this->votos_nominais = votos_nominais;
 	this->situacao = situacao;
