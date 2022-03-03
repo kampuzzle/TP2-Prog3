@@ -33,11 +33,12 @@ public:
     void candidatos_nao_eleitos();
     void nao_deviam_ser_eleitos();
     void votos_totais_e_num_eleitos()const;
-    void votos_legenda()const;
+    void votos_legenda();
     void eleitos_por_idade();
-    void eleitos_por_sexo()const;
-    void total_votos_validos()const;
+    void eleitos_por_sexo();
+    void total_votos_validos();
     double calcula_porc(int v1,int v2);
+    void precisao_double(double num);
     //~Diagnostico(); 
 };
 

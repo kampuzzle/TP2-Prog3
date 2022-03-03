@@ -24,7 +24,6 @@ void Candidato::set_partido(vector<Partido*> partidos){
 	for(auto p: partidos){
 	 	if(this->numero_partido == p->get_numero_partido()){
 	 		this->partido = p;
-	 		this->partido->print();
 		}
 	}
 }

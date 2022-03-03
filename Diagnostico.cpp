@@ -4,7 +4,9 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <iomanip>
 #include "Tokenizer.h"
+#include "NumberUtils.h"
 
 using namespace cpp_util;
 
@@ -76,7 +78,7 @@ int Diagnostico::num_vagas(){
 }
 
 void Diagnostico::print_questao_1(){
-    cout << "Número de vagas: " << num_vagas() << endl;
+    cout << "Número de vagas: " << num_vagas() << endl << endl;
 }
 
 void Diagnostico::candidatos_eleitos()const{
@@ -179,7 +181,7 @@ void Diagnostico::votos_totais_e_num_eleitos()const{
     }
 }
 
-void Diagnostico::votos_legenda()const{
+void Diagnostico::votos_legenda(){
     cout <<"\nVotação dos partidos (apenas votos de legenda):" << endl;
     
     //ordenacao
@@ -199,7 +201,7 @@ void Diagnostico::votos_legenda()const{
         if(p->get_votos_legenda() == 0){
             cout << "proporção não calculada, 0 voto no partido)";
         } else{
-            cout << p->calcula_porcentagem(p->get_qtd_votos(), p->get_votos_legenda());
+            precisao_double(p->calcula_porcentagem(p->get_qtd_votos(), p->get_votos_legenda()));
             cout << "% do total do partido)" << endl;
         }
     }
@@ -236,27 +238,27 @@ void Diagnostico::eleitos_por_idade(){
     //calcula a porcentagem de cada faixa etaria chamando a funcao calcula_porc
     double porc = calcula_porc(num_vagas(), menor30);
     cout <<"      Idade < 30: " << menor30 << " (";
-	cout << porc;
+	precisao_double(porc);
 
 	porc = calcula_porc(num_vagas(), menor40);
 	cout << "%)\n30 <= Idade < 40: " << menor40 << " (";
-	cout << porc;
+	precisao_double(porc);
 
 	porc = calcula_porc(num_vagas(), menor50);
 	cout << "%)\n40 <= Idade < 50: " << menor50 << " (";
-	cout << porc;
+	precisao_double(porc);
 
 	porc = calcula_porc(num_vagas(), menor60);
 	cout << "%)\n50 <= Idade < 60: " << menor60 << " (";
-	cout << porc;
+	precisao_double(porc);
 
 	porc = calcula_porc(num_vagas(), maior60);
 	cout << "%)\n60 <= Idade     : " << maior60 << " (";
-	cout << porc;
+	precisao_double(porc);
 	cout << "%)" << endl;
 }
 
-void Diagnostico::eleitos_por_sexo()const{
+void Diagnostico::eleitos_por_sexo(){
     int m = 0, f = 0;
     for(auto c: candidatos){
         if(c->eleito() == 1){
@@ -274,14 +276,14 @@ void Diagnostico::eleitos_por_sexo()const{
 
     cout << "\nEleitos, por sexo:" << endl;
 	cout << "Feminino:  " << f << " (";
-	cout << porc_fem;
+	precisao_double(porc_fem);
 	cout <<"%)" << endl;
 	cout << "Masculino: " << m << " (";
-	cout << porc_masc;
+	precisao_double(porc_masc);
 	cout << "%)\n" << endl;
 }
 
-void Diagnostico::total_votos_validos()const{
+void Diagnostico::total_votos_validos(){
     int total_votos=0;
 	int total_nominais=0;
 	int total_legenda=0;
@@ -303,8 +305,40 @@ void Diagnostico::total_votos_validos()const{
 
 	cout << "Total de votos válidos:    " << total_votos << endl;
 	cout << "Total de votos nominais:   " << total_nominais << " (";
-	cout << porcentagemNominais;
+	precisao_double(porcentagemNominais);
 	cout << "%)\nTotal de votos de legenda: " << total_legenda << " (";
-	cout << porcentagemLegenda;
+	precisao_double(porcentagemLegenda);
 	cout << "%)\n" << endl;
+
+}
+
+void Diagnostico::precisao_double(double num){
+    // Create an output string stream
+    ostringstream streamObj3;
+    // Set Fixed -Point Notation
+    streamObj3 << std::fixed;
+    // Set precision to 2 digits
+    streamObj3 << std::setprecision(2);
+    //Add double to stream
+    streamObj3 << num;
+    // Get string from output string stream
+    string formatada = streamObj3.str();
+
+    int i=0,j=0;
+    while(1){
+        if( j != 0){
+            j++;
+        }
+        if(formatada[i]=='.'){
+            j++;
+            cout << ',';
+        } else {
+            cout << formatada[i];
+        }
+        i++;
+        if(j == 3){
+            break;
+        }
+    }
+
 }
