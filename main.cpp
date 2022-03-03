@@ -17,6 +17,7 @@ int main () {
     diagnostico->candidatos_mais_votados();
     // PRECISA DA ORDENAÇÃO PRA FUNCIONAR DIREITO
     diagnostico->candidatos_nao_eleitos();
-    
+    diagnostico->nao_deviam_ser_eleitos();
+    diagnostico->votos_totais_e_num_eleitos();
     
 }

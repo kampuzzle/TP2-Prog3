@@ -29,6 +29,7 @@ public:
     void candidatos_mais_votados();
     void candidatos_nao_eleitos();
     void nao_deviam_ser_eleitos();
+    void votos_totais_e_num_eleitos();
     //~Diagnostico(); 
 };
 

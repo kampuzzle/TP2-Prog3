@@ -66,6 +66,8 @@ void Diagnostico::print_questao_1(){
 }
 
 void Diagnostico::candidatos_eleitos(){
+    cout << "Vereadores eleitos:" << endl;
+    
     for(auto c: this->candidatos){
         if(c->eleito() == 1){
             c->print();
@@ -76,6 +78,8 @@ void Diagnostico::candidatos_eleitos(){
 void Diagnostico::candidatos_mais_votados(){
     int vagas = num_vagas();
     int contador = 0;
+
+    cout << "\nCandidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):" << endl;
 
     for(auto c: this->candidatos){
         if(contador < vagas){
@@ -119,5 +123,44 @@ void Diagnostico::nao_deviam_ser_eleitos(){
             }
         }
         contador++;
+    }
+}
+
+void Diagnostico::votos_totais_e_num_eleitos(){
+    cout << "\nVotação dos partidos e número de candidatos eleitos:" << endl;
+
+    int contador = 1;
+
+    for(auto p: this->partidos){
+        p->votos_totais();
+    }
+
+    //ordenacao
+
+    for(auto p: this->partidos){
+        cout << contador << " - ";
+        contador++;
+        p->print();
+
+        if(p->get_qtd_votos() <= 1){
+            cout << p->get_qtd_votos() << " voto (";
+        }else{
+            cout << p->get_qtd_votos() << " votos (";
+        }
+
+        if(p->get_qtd_votos() - p->get_votos_legenda() <= 1){
+            cout << p->get_qtd_votos() - p->get_votos_legenda() << " nominal e ";
+        }else{
+            cout << p->get_qtd_votos() - p->get_votos_legenda() << "nominais e ";
+        }
+
+        cout << p->get_votos_legenda() << " de legenda), ";
+        cout << p->get_qtd_eleitos();
+
+        if(p->get_qtd_eleitos() <= 1){
+            cout << " candidato eleito" << endl;
+        }else{
+            cout << " candidatos eleitos" << endl;
+        }
     }
 }

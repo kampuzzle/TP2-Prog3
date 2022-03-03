@@ -46,3 +46,8 @@ void Candidato::print()const{
 		cout << nome << " / " << nome_urna << " (" << siglaPartido << ", " << votos_nominais << " votos)" << endl;
 	}
 }
+
+int Candidato::get_votos_nominais() const{
+	cout << this->votos_nominais << endl;
+	return this->votos_nominais;
+}
