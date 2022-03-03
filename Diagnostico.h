@@ -6,6 +6,8 @@
 #include "Partido.h"
 #include "Candidato.h"
 #include "StringUtils.h"
+#include "DateUtils.h"
+using namespace cpp_util;
 
 class Partido;
 class Candidato;
@@ -13,16 +15,17 @@ class Candidato;
 class Diagnostico{
     vector<Partido*> partidos;
     vector<Candidato*> candidatos;
-    //data
+    time_t data;
 
 public:
     
-    Diagnostico();
+    Diagnostico(const string& data);
     //leitura dos arquivos q era pra ser em verificacoes mas n sei como eh
     //utility class em c++
     void le_arquivo_candidatos(string file); 
     void le_arquivo_partidos(string file); 
     void set_partidos_candidatos();
+    void set_idades();
     int num_vagas();
     void print_questao_1();
     void candidatos_eleitos()const;
@@ -31,9 +34,10 @@ public:
     void nao_deviam_ser_eleitos();
     void votos_totais_e_num_eleitos()const;
     void votos_legenda()const;
-    void eleitos_por_idade()const;
+    void eleitos_por_idade();
     void eleitos_por_sexo()const;
     void total_votos_validos()const;
+    double calcula_porc(int v1,int v2);
     //~Diagnostico(); 
 };
 

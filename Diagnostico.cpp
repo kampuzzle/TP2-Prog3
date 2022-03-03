@@ -8,7 +8,8 @@
 
 using namespace cpp_util;
 
-Diagnostico::Diagnostico(){
+Diagnostico::Diagnostico(const string& data){
+    this->data = parseDate(data,DATE_FORMAT_PT_BR_SHORT);
 };
 
 void Diagnostico::le_arquivo_candidatos(string file){    
@@ -55,6 +56,12 @@ void Diagnostico::set_partidos_candidatos(){
         p->numero_de_eleitos();
     }
 
+}
+
+void Diagnostico::set_idades(){
+    for(auto c:candidatos){
+        c->calcula_idade(data);  
+    }
 }
 
 int Diagnostico::num_vagas(){
@@ -198,7 +205,11 @@ void Diagnostico::votos_legenda()const{
     }
 }
 
-void Diagnostico::eleitos_por_idade()const{
+double Diagnostico::calcula_porc(int v1,int v2){
+    return (double)v2 *100/v1;
+}
+
+void Diagnostico::eleitos_por_idade(){
     cout <<"\nEleitos, por faixa etária (na data da eleição):" << endl;
     int idade;
 	int menor30=0, menor40=0, menor50=0, menor60=0, maior60=0;
@@ -207,8 +218,7 @@ void Diagnostico::eleitos_por_idade()const{
     //um dos contadores
 	for(auto c: candidatos){
 		if(c->get_situacao().compare("Eleito") == 0){
-            //PEGAR IDADE
-			//idade = c->get_idade();
+			idade = c->get_idade();
 			if(idade < 30){
 				menor30++;
 			}else if(30 <= idade && idade < 40){
@@ -224,25 +234,25 @@ void Diagnostico::eleitos_por_idade()const{
 	}
 
     //calcula a porcentagem de cada faixa etaria chamando a funcao calcula_porc
-    //double porc = Verificacoes.calcula_porc(numero_vagas(), menor30);
-    cout<<"      Idade < 30: " << menor30 << " (";
-	//System.out.printf("%.2f",porc);
+    double porc = calcula_porc(num_vagas(), menor30);
+    cout <<"      Idade < 30: " << menor30 << " (";
+	cout << porc;
 
-	//porc = Verificacoes.calcula_porc(numero_vagas(), menor40);
+	porc = calcula_porc(num_vagas(), menor40);
 	cout << "%)\n30 <= Idade < 40: " << menor40 << " (";
-	//System.out.printf("%.2f",porc);
+	cout << porc;
 
-	//porc = Verificacoes.calcula_porc(numero_vagas(), menor50);
+	porc = calcula_porc(num_vagas(), menor50);
 	cout << "%)\n40 <= Idade < 50: " << menor50 << " (";
-	//System.out.printf("%.2f",porc);
+	cout << porc;
 
-	//porc = Verificacoes.calcula_porc(numero_vagas(), menor60);
+	porc = calcula_porc(num_vagas(), menor60);
 	cout << "%)\n50 <= Idade < 60: " << menor60 << " (";
-	//System.out.printf("%.2f",porc);
+	cout << porc;
 
-	//porc = Verificacoes.calcula_porc(numero_vagas(), maior60);
+	porc = calcula_porc(num_vagas(), maior60);
 	cout << "%)\n60 <= Idade     : " << maior60 << " (";
-	//System.out.printf("%.2f",porc);
+	cout << porc;
 	cout << "%)" << endl;
 }
 

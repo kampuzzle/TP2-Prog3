@@ -7,10 +7,11 @@
 using namespace std;
 
 int main () {
-    Diagnostico* diagnostico = new Diagnostico();
+    Diagnostico* diagnostico = new Diagnostico("15/11/2020");
 	diagnostico->le_arquivo_candidatos("candidatos.csv");
     diagnostico->le_arquivo_partidos("partidos.csv");
     diagnostico->set_partidos_candidatos();
+    diagnostico->set_idades();
 
     diagnostico->print_questao_1();
     diagnostico->candidatos_eleitos();  
@@ -22,6 +23,7 @@ int main () {
     diagnostico->votos_totais_e_num_eleitos();
     diagnostico->votos_legenda();
     //mais e menos votados simplesmente n fiz
+    diagnostico->eleitos_por_idade();
     diagnostico->eleitos_por_sexo();
     diagnostico->total_votos_validos();
 }
