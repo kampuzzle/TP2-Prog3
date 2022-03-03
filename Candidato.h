@@ -28,18 +28,21 @@ class Candidato{
         int eleito();
         void set_partido(vector<Partido*> partidos);
         int get_votos_nominais() const;
+        int get_numero_partido() const;
+        const string& get_situacao() const;
+        char get_sexo() const;
+       
         //void calcula_idade(LocalDate data_eleicao);
         //LocalDate get_data_nasc() const;
         /*Partido* get_partido();
         int get_numero() const;
         int get_idade() const;
         
-        const string& get_situacao() const;
         const string& get_nome() const;
         const string& get_nome_urna() const;
         char get_sexo() const;
         const string& get_destino_voto() const;
-        int get_numero_partido() const;*/
+        */
 
         void print() const;
         

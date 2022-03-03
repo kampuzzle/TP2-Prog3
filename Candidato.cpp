@@ -48,6 +48,18 @@ void Candidato::print()const{
 }
 
 int Candidato::get_votos_nominais() const{
-	cout << this->votos_nominais << endl;
+	//cout << this->votos_nominais << endl;
 	return this->votos_nominais;
+}
+
+int Candidato::get_numero_partido() const{
+	return this->numero_partido;
+}
+
+const string& Candidato::get_situacao() const{
+	return this->situacao;
+}
+
+char Candidato::get_sexo() const{
+	return this->sexo;
 }

@@ -9,6 +9,18 @@ Partido::Partido(int numero_partido, int votos_legenda,const string& nome_partid
 	this->qtd_eleitos = 0;
 }
 
+void Partido::set_candidatos( const vector<Candidato*>& candidatos){
+	vector<Candidato*> candidatos_do_partido;
+
+	for(auto c: candidatos){
+		if(c->get_numero_partido() == numero_partido){
+			candidatos_do_partido.push_back(c);
+		}
+	}
+
+	candidatos_part = candidatos_do_partido;
+}
+
 int Partido::get_numero_partido() const{
 	return this->numero_partido;
 }
@@ -43,4 +55,17 @@ int Partido::votos_totais(){
 	this->qtd_votos = votos;
 
 	return votos;
+}
+
+void Partido::numero_de_eleitos(){
+	for(auto c: candidatos_part){
+		if(c->eleito() == 1){
+			qtd_eleitos++;
+		}
+	}
+}
+
+double Partido::calcula_porcentagem(int votos1,int votos2)const{
+	return (double)votos2 * 100 / votos1;
+
 }

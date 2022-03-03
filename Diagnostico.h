@@ -25,11 +25,15 @@ public:
     void set_partidos_candidatos();
     int num_vagas();
     void print_questao_1();
-    void candidatos_eleitos();
+    void candidatos_eleitos()const;
     void candidatos_mais_votados();
     void candidatos_nao_eleitos();
     void nao_deviam_ser_eleitos();
-    void votos_totais_e_num_eleitos();
+    void votos_totais_e_num_eleitos()const;
+    void votos_legenda()const;
+    void eleitos_por_idade()const;
+    void eleitos_por_sexo()const;
+    void total_votos_validos()const;
     //~Diagnostico(); 
 };
 
