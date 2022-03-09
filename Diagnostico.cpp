@@ -342,3 +342,13 @@ void Diagnostico::precisao_double(double num){
     }
 
 }
+
+Diagnostico::~Diagnostico(){
+    for (auto c:candidatos){
+        delete c;
+    }
+
+    for (auto p:partidos){
+        delete p;
+    }
+}

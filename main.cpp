@@ -26,4 +26,6 @@ int main () {
     diagnostico->eleitos_por_idade();
     diagnostico->eleitos_por_sexo();
     diagnostico->total_votos_validos();
+
+    delete diagnostico;
 }

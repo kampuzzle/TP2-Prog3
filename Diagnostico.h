@@ -39,7 +39,7 @@ public:
     void total_votos_validos();
     double calcula_porc(int v1,int v2);
     void precisao_double(double num);
-    //~Diagnostico(); 
+    ~Diagnostico(); 
 };
 
 #endif
