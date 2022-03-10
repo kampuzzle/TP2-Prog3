@@ -83,10 +83,13 @@ void Diagnostico::print_questao_1(){
 
 void Diagnostico::candidatos_eleitos()const{
     cout << "Vereadores eleitos:" << endl;
-    
+    int i = 1;
+
     for(auto c: this->candidatos){
         if(c->eleito() == 1){
+            cout << i << " - ";
             c->print();
+            i++;
         }
     }
 }
@@ -308,7 +311,7 @@ void Diagnostico::total_votos_validos(){
 	precisao_double(porcentagemNominais);
 	cout << "%)\nTotal de votos de legenda: " << total_legenda << " (";
 	precisao_double(porcentagemLegenda);
-	cout << "%)\n" << endl;
+	cout << "%)" << endl;
 
 }
 
