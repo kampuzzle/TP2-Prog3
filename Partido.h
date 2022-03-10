@@ -32,6 +32,7 @@ class Partido{
         int votos_totais();
         void numero_de_eleitos();
         double calcula_porcentagem(int votos1,int votos2)const;
+        vector<Candidato> get_candidatos() const;
         /*
         double calcula_porcentagem(int totais, int part) const;
         ??? vector<Candidato*> get_candidatos() const;

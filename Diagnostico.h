@@ -34,6 +34,7 @@ public:
     void nao_deviam_ser_eleitos();
     void votos_totais_e_num_eleitos();
     void votos_legenda();
+    void mais_e_menos_votados();
     void eleitos_por_idade();
     void eleitos_por_sexo();
     void total_votos_validos();

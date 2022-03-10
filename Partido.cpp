@@ -83,8 +83,36 @@ bool ordenaPartido1(Partido *p1,Partido *p2){
 	}
 	return true;
 }
-bool ordenaPartido2(Partido *p1,Partido *p2){
-	
 
-	
+bool ordenaPartido2(Partido *p1,Partido *p2){
+	//compara pela quantidade de votos de legenda
+	int dif_legenda = p2->get_votos_legenda() - p1->get_votos_legenda();
+
+	if(dif_legenda == 0){
+		//se tiverem a msm qtd de votos de legenda, compara pela qtd de votos nominais
+		int dif1 = p1->get_qtd_votos() - p1->get_votos_legenda();
+		int dif2 = p2->get_qtd_votos() - p2->get_votos_legenda();
+
+		int dif_nominais = dif2 - dif1;
+
+		if(dif_nominais == 0){
+			//se tiverem a msm qtd de votos nominais, compara pelo numero do partido
+			if(p1->get_numero_partido() < p2->get_numero_partido()){
+				return false;
+			}
+			return true;
+		}
+
+		if(dif_nominais > 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	if(dif_legenda > 0){
+		return false;
+	}else{
+		return true;
+	}
 }

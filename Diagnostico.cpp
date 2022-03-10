@@ -9,6 +9,7 @@
 #include "NumberUtils.h"
 
 using namespace cpp_util;
+using std::copy;
 
 Diagnostico::Diagnostico(const string& data){
     this->data = parseDate(data,DATE_FORMAT_PT_BR_SHORT);
@@ -192,6 +193,7 @@ void Diagnostico::votos_legenda(){
     cout <<"\nVotação dos partidos (apenas votos de legenda):" << endl;
     
     //ordenacao
+    sort(partidos.begin(),partidos.end(), ordenaPartido2);
 
     int contador = 1;
     for(auto p: partidos){
@@ -213,6 +215,35 @@ void Diagnostico::votos_legenda(){
         }
     }
 }
+
+void Diagnostico::mais_e_menos_votados() {
+    cout << "\nPrimeiro e último colocados de cada partido:";
+
+    int contador = 1;
+
+    vector<Candidato> mais_votados;
+    vector<Partido> partidos_ordenados;
+
+    for(auto p: partidos) {
+        vector<Candidato> candidatos2 = p.get_candidatos();
+
+        if(candidatos2.size() != 0) {
+            mais_votados.add(candidatos2.get(0));
+        }
+    }
+
+    sort(mais_votados.begin(), mais_votados.end(), ordenaCandidato1());
+
+    for(auto c: mais_votados) {
+        partidos_ordenados.add(c.get_numero_partido());
+    }
+
+    for(auto p: partidos_ordenados) {
+        sort(p.candidatos_part().begin(), p.candidatos_part().end(), ordenaCandidato1);
+    }
+
+}   
+
 
 double Diagnostico::calcula_porc(int v1,int v2){
     return (double)v2 *100/v1;
