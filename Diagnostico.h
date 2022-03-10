@@ -28,11 +28,11 @@ public:
     void set_idades();
     int num_vagas();
     void print_questao_1();
-    void candidatos_eleitos()const;
+    void candidatos_eleitos();
     void candidatos_mais_votados();
     void candidatos_nao_eleitos();
     void nao_deviam_ser_eleitos();
-    void votos_totais_e_num_eleitos()const;
+    void votos_totais_e_num_eleitos();
     void votos_legenda();
     void eleitos_por_idade();
     void eleitos_por_sexo();
@@ -41,5 +41,7 @@ public:
     void precisao_double(double num);
     ~Diagnostico(); 
 };
+
+void ordena(vector<Candidato*>& candidatos);
 
 #endif

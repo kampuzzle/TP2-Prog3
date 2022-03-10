@@ -69,3 +69,22 @@ double Partido::calcula_porcentagem(int votos1,int votos2)const{
 	return (double)votos2 * 100 / votos1;
 
 }
+
+bool ordenaPartido1(Partido *p1,Partido *p2){
+	if(p1->get_qtd_votos() == p2->get_qtd_votos()){
+		if(p1->get_numero_partido() < p2->get_numero_partido()){
+			return true;
+		}
+		return false;
+	}
+
+	if( p1->get_qtd_votos() < p2->get_qtd_votos()){
+		return false;
+	}
+	return true;
+}
+bool ordenaPartido2(Partido *p1,Partido *p2){
+	
+
+	
+}

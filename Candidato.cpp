@@ -96,3 +96,50 @@ void Candidato::calcula_idade(time_t dataEleicao){
 int Candidato::get_idade()const{
 	return this->idade;
 }
+
+bool ordenaCandidato1(Candidato *c1,Candidato *c2){
+	int dif = c1->get_votos_nominais() - c2->get_votos_nominais();
+
+	//se der errado uma ordenacao de candidato, trocar o true e false SO DESSE IF
+	if(dif == 0){
+		dif = difftime(c1->get_data_nasc(),c2->get_data_nasc());
+		if(dif < 0){
+			return false;
+		}
+		return true;
+	}
+
+	if(dif < 0 ){
+		return false;
+	}
+	return true;
+}
+
+bool ordenaCandidato2(Candidato* c1, Candidato *c2){
+	//TESTAR
+	
+	int dif = c1->get_votos_nominais() - c2->get_votos_nominais();
+
+	if(dif == 0){
+		int numParti = c1->get_numero_partido() - c2->get_numero_partido();
+
+		if(numParti != 0){
+			if(c1->get_numero_partido() - c2->get_numero_partido() < 0){
+				return true;
+			}
+			return false;
+		}
+
+		double diff = difftime(c1->get_data_nasc(),c2->get_data_nasc());
+
+		if( diff < 0){
+			return true;
+		}
+		return false;
+	}
+
+	if(dif < 0 ){
+		return false;
+	}
+	return true;
+}

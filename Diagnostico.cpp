@@ -81,9 +81,12 @@ void Diagnostico::print_questao_1(){
     cout << "Número de vagas: " << num_vagas() << endl << endl;
 }
 
-void Diagnostico::candidatos_eleitos()const{
+void Diagnostico::candidatos_eleitos(){
     cout << "Vereadores eleitos:" << endl;
     int i = 1;
+
+    //ordenacao
+    sort(candidatos.begin(),candidatos.end(),ordenaCandidato1);
 
     for(auto c: this->candidatos){
         if(c->eleito() == 1){
@@ -145,7 +148,7 @@ void Diagnostico::nao_deviam_ser_eleitos(){
     }
 }
 
-void Diagnostico::votos_totais_e_num_eleitos()const{
+void Diagnostico::votos_totais_e_num_eleitos(){
     cout << "\nVotação dos partidos e número de candidatos eleitos:" << endl;
 
     int contador = 1;
@@ -155,6 +158,7 @@ void Diagnostico::votos_totais_e_num_eleitos()const{
     }
 
     //ordenacao
+    sort(partidos.begin(),partidos.end(),ordenaPartido1);
 
     for(auto p: this->partidos){
         cout << contador << " - ";

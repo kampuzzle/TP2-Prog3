@@ -37,20 +37,12 @@ class Candidato{
         void calcula_idade(time_t dataEleicao);
         int age(int pd, int pm, int py,int bd, int bm, int by);
         int get_idade()const;
-       
-        //void calcula_idade(LocalDate data_eleicao);
-        /*Partido* get_partido();
-        int get_numero() const;
-        
-        const string& get_nome() const;
-        const string& get_nome_urna() const;
-        char get_sexo() const;
-        const string& get_destino_voto() const;
-        */
 
         void print() const;
         
-        //~Candidato();
 };
+
+bool ordenaCandidato1(Candidato *c1, Candidato *c2);
+bool ordenaCandidato2(Candidato* c1, Candidato *c2);
 
 #endif

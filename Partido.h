@@ -37,8 +37,10 @@ class Partido{
         ??? vector<Candidato*> get_candidatos() const;
         const string& get_sigla_partido() const;
         const string& get_nome_partido()const;  
-        void set_qtd_votos(int qtd);
-        ~Partido();*/
+        void set_qtd_votos(int qtd);*/
 };
+
+bool ordenaPartido1(Partido *p1,Partido *p2);
+bool ordenaPartido2(Partido *p1,Partido *p2);
 
 #endif
