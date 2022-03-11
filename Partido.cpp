@@ -9,6 +9,10 @@ Partido::Partido(int numero_partido, int votos_legenda,const string& nome_partid
 	this->qtd_eleitos = 0;
 }
 
+vector<Candidato*> Partido::get_candidatos() const{
+	return candidatos_part;
+}
+
 void Partido::set_candidatos( const vector<Candidato*>& candidatos){
 	vector<Candidato*> candidatos_do_partido;
 
@@ -104,9 +108,9 @@ bool ordenaPartido2(Partido *p1,Partido *p2){
 		}
 
 		if(dif_nominais > 0){
-			return true;
-		}else{
 			return false;
+		}else{
+			return true;
 		}
 	}
 

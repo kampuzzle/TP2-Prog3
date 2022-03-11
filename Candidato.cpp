@@ -40,7 +40,6 @@ void Candidato::print()const{
 }
 
 int Candidato::get_votos_nominais() const{
-	//cout << this->votos_nominais << endl;
 	return this->votos_nominais;
 }
 
@@ -62,7 +61,6 @@ time_t Candidato::get_data_nasc()const{
 
 int Candidato::age(int pd, int pm, int py,int bd, int bm, int by){
 	int m, y;
-	//int md[] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
 	y = py - by;
 
 	if (pm < bm){
@@ -74,10 +72,7 @@ int Candidato::age(int pd, int pm, int py,int bd, int bm, int by){
 
   	if (pd < bd){
     	m--;
-    	//d = md[pm - 1] - (bd - pd);
-  	} else {
-		//d = pd - bd;
-	}
+  	}
   	return y;
 }
 
@@ -97,16 +92,27 @@ int Candidato::get_idade()const{
 	return this->idade;
 }
 
+Partido* Candidato::get_partido()const{
+	return partido;
+}
+
+const string& Candidato::get_nome_urna()const{
+	return nome_urna;
+}
+
+int Candidato::get_numero()const{
+	return numero;
+}
+
 bool ordenaCandidato1(Candidato *c1,Candidato *c2){
 	int dif = c1->get_votos_nominais() - c2->get_votos_nominais();
 
-	//se der errado uma ordenacao de candidato, trocar o true e false SO DESSE IF
 	if(dif == 0){
 		dif = difftime(c1->get_data_nasc(),c2->get_data_nasc());
 		if(dif < 0){
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	if(dif < 0 ){
@@ -116,8 +122,6 @@ bool ordenaCandidato1(Candidato *c1,Candidato *c2){
 }
 
 bool ordenaCandidato2(Candidato* c1, Candidato *c2){
-	//TESTAR
-	
 	int dif = c1->get_votos_nominais() - c2->get_votos_nominais();
 
 	if(dif == 0){

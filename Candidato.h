@@ -37,7 +37,9 @@ class Candidato{
         void calcula_idade(time_t dataEleicao);
         int age(int pd, int pm, int py,int bd, int bm, int by);
         int get_idade()const;
-
+        Partido* get_partido()const;
+        const string& get_nome_urna()const;
+        int get_numero()const;
         void print() const;
         
 };

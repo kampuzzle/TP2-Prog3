@@ -12,6 +12,7 @@ using namespace cpp_util;
 using std::copy;
 
 Diagnostico::Diagnostico(const string& data){
+    //salva a data de nascimento
     this->data = parseDate(data,DATE_FORMAT_PT_BR_SHORT);
 };
 
@@ -25,12 +26,13 @@ void Diagnostico::le_arquivo_candidatos(string file){
 	    vector<string> vec = tok2.remaining();
 
         if(vec[7].compare("Válido") == 0){
+            //criando os candidatos e adicionando-os no vector
             Candidato* candidato = new Candidato(stoi(vec[0]),stoi(vec[1]),vec[2],vec[3],vec[4],vec[5][0],vec[6],vec[7],stoi(vec[8]));
             candidatos.push_back(candidato);
         }
     }
 
-	in.close();
+	in.close();//fecha o arquivo
 }
 
 void Diagnostico::le_arquivo_partidos(string file){    
@@ -50,10 +52,12 @@ void Diagnostico::le_arquivo_partidos(string file){
 }
 
 void Diagnostico::set_partidos_candidatos(){
+    //definindo os partidos de um candidato
     for(auto c: this->candidatos){
         c->set_partido(this->partidos);
     }
 
+    //definindo os candidatos de um partido
     for(auto p: this->partidos){
         p->set_candidatos(this->candidatos);
         p->numero_de_eleitos();
@@ -67,6 +71,7 @@ void Diagnostico::set_idades(){
     }
 }
 
+//verifica quantos candidatos foram eleitos e, consequentemente, quantas vagas existiam 
 int Diagnostico::num_vagas(){
     int vagas=0;
     for(auto c: this->candidatos){
@@ -82,6 +87,7 @@ void Diagnostico::print_questao_1(){
     cout << "Número de vagas: " << num_vagas() << endl << endl;
 }
 
+//printa todos os candidatos eleitos
 void Diagnostico::candidatos_eleitos(){
     cout << "Vereadores eleitos:" << endl;
     int i = 1;
@@ -104,6 +110,8 @@ void Diagnostico::candidatos_mais_votados(){
 
     cout << "\nCandidatos mais votados (em ordem decrescente de votação e respeitando número de vagas):" << endl;
 
+    sort(candidatos.begin(),candidatos.end(),ordenaCandidato1);
+
     for(auto c: this->candidatos){
         if(contador < vagas){
             cout << contador + 1 << " - ";
@@ -116,12 +124,16 @@ void Diagnostico::candidatos_mais_votados(){
 void Diagnostico::candidatos_nao_eleitos(){
     int vagas = num_vagas();
     int contador = 0;
+    //usamos a seguinte logica: percorrendo os candidatos com maior numero de votos dentro da quantidade de vagas disponiveis,
+        //todos os que nao foram eleitos, mas que, de acordo com a quantidade de votos, deveriam ter sido, foram impressos no terminal
 
     cout << "\nTeriam sido eleitos se a votação fosse majoritária, e não foram eleitos:\n(com sua posição no ranking de mais votados)" << endl;
 
+    sort(candidatos.begin(),candidatos.end(),ordenaCandidato1);
+
     for(auto c: this->candidatos){
         if(contador < vagas){
-            if(c->eleito() == 1){
+            if(c->eleito() == 0){
                 cout << contador + 1 << " - ";
                 c->print();
             }          
@@ -134,7 +146,12 @@ void Diagnostico::nao_deviam_ser_eleitos(){
     int vagas = num_vagas();
     int contador = 0;
 
+    //de forma quase contraria à função anterior, imprimimos todos os candidatos que nao ficaram entre os mais votados dentro da
+        //quantidade de vagas disponiveis, mas que mesmo assim foram eleitos
+
     cout << "\nEleitos, que se beneficiaram do sistema proporcional:\n(com sua posição no ranking de mais votados)" << endl;
+
+    sort(candidatos.begin(),candidatos.end(),ordenaCandidato1);
 
     for(auto c: this->candidatos){
         if(contador < vagas){
@@ -217,32 +234,68 @@ void Diagnostico::votos_legenda(){
 }
 
 void Diagnostico::mais_e_menos_votados() {
-    cout << "\nPrimeiro e último colocados de cada partido:";
+    cout << "\nPrimeiro e último colocados de cada partido:\n";
 
     int contador = 1;
 
-    vector<Candidato> mais_votados;
-    vector<Partido> partidos_ordenados;
-
+    //declara dois novos arrays, um para armazenar os candidatos mais votados de cada partido, outro para armazenar os partidos com os candidatos ordenados
+    vector<Candidato*> mais_votados;
+    vector<Partido*> partidos_ordenados;
+    
     for(auto p: partidos) {
-        vector<Candidato> candidatos2 = p.get_candidatos();
+        //para cada partido em partidos, cria uma lista de candidatos com os candidatos do partido, usando a função get_candidatos e ordena essa lista
+        vector<Candidato*> candidatos2;
+        for(auto c:p->get_candidatos()){
+            candidatos2.push_back(c);
+        }
+        sort(candidatos2.begin(),candidatos2.end(),ordenaCandidato1);
 
         if(candidatos2.size() != 0) {
-            mais_votados.add(candidatos2.get(0));
+            //desconsidera o partido que nao tem candidatos
+                //adiciona o candidato da posição 0 (ou seja, o mais votado) no vector mais_votados
+            mais_votados.push_back(candidatos2.front());
         }
     }
-
-    sort(mais_votados.begin(), mais_votados.end(), ordenaCandidato1());
-
+    
+    sort(mais_votados.begin(), mais_votados.end(), ordenaCandidato2);
+    
+    //para cada candidato em mais_votados, adiciona o partido desse candidado no vector de partidos ordenados
     for(auto c: mais_votados) {
-        partidos_ordenados.add(c.get_numero_partido());
+        partidos_ordenados.push_back(c->get_partido());
     }
 
+    //para cada partido em partidos_ordenados, ordena a lista de candidatos desse partido e imprime, primeiramente, o candidato da posição 0 (o mais votado)
+        //e depois o candidato da ultima posição (o menos votado)
     for(auto p: partidos_ordenados) {
-        sort(p.candidatos_part().begin(), p.candidatos_part().end(), ordenaCandidato1);
+        vector<Candidato*> c;
+
+        for(auto candid:p->get_candidatos()){
+            c.push_back(candid);
+        }
+        sort(c.begin(), c.end(), ordenaCandidato1);
+        cout << contador << " - ";
+        contador++;
+        p->print();
+
+        print_questao_8(c.front());
+        cout <<" / ";
+        
+        print_questao_8(c.back());
+        cout << "\n";
     }
 
 }   
+
+//funcao para auxiliar na impressao de saida da questao 8
+void print_questao_8(Candidato* c){
+	cout << c->get_nome_urna() << " (" << c->get_numero() << ", " << c->get_votos_nominais();
+	if(c->get_votos_nominais() <= 1){
+		cout << " voto)";
+	}
+	else{
+		cout << " votos)";
+	}
+}
 
 
 double Diagnostico::calcula_porc(int v1,int v2){

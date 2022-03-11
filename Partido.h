@@ -32,13 +32,7 @@ class Partido{
         int votos_totais();
         void numero_de_eleitos();
         double calcula_porcentagem(int votos1,int votos2)const;
-        vector<Candidato> get_candidatos() const;
-        /*
-        double calcula_porcentagem(int totais, int part) const;
-        ??? vector<Candidato*> get_candidatos() const;
-        const string& get_sigla_partido() const;
-        const string& get_nome_partido()const;  
-        void set_qtd_votos(int qtd);*/
+        vector<Candidato*> get_candidatos() const;
 };
 
 bool ordenaPartido1(Partido *p1,Partido *p2);

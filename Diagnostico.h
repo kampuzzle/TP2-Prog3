@@ -20,8 +20,6 @@ class Diagnostico{
 public:
     
     Diagnostico(const string& data);
-    //leitura dos arquivos q era pra ser em verificacoes mas n sei como eh
-    //utility class em c++
     void le_arquivo_candidatos(string file); 
     void le_arquivo_partidos(string file); 
     void set_partidos_candidatos();
@@ -43,6 +41,6 @@ public:
     ~Diagnostico(); 
 };
 
-void ordena(vector<Candidato*>& candidatos);
+void print_questao_8(Candidato* c);
 
 #endif
