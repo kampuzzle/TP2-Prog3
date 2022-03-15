@@ -225,7 +225,7 @@ void Diagnostico::votos_legenda(){
         }
 
         if(p->get_votos_legenda() == 0){
-            cout << "proporção não calculada, 0 voto no partido)";
+            cout << "proporção não calculada, 0 voto no partido)" << endl;
         } else{
             precisao_double(p->calcula_porcentagem(p->get_qtd_votos(), p->get_votos_legenda()));
             cout << "% do total do partido)" << endl;
@@ -399,7 +399,7 @@ void Diagnostico::total_votos_validos(){
 	precisao_double(porcentagemNominais);
 	cout << "%)\nTotal de votos de legenda: " << total_legenda << " (";
 	precisao_double(porcentagemLegenda);
-	cout << "%)" << endl;
+	cout << "%)" << endl << endl;
 
 }
 
