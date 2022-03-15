@@ -6,6 +6,7 @@
 #include <list>
 #include "DateUtils.h"
 #include "Partido.h"
+#include "StringUtils.h"
 using namespace std;
 using namespace cpp_util;
 
@@ -25,7 +26,7 @@ class Candidato{
     int idade;
 
     public:
-        Candidato(int numero, int votos_nominais,const string& situacao,const string& nome,const string& nome_urna, char sexo,const string& data_nasc,const string& destino_voto, int numero_partido);
+        Candidato(int numero, int votos_nominais,const string& situacao,string& nome,string& nome_urna, char sexo,const string& data_nasc,const string& destino_voto, int numero_partido);
 
         int eleito();
         void set_partido(vector<Partido*> partidos);
@@ -44,6 +45,7 @@ class Candidato{
         
 };
 
+string rtrim(const string &s);
 bool ordenaCandidato1(Candidato *c1, Candidato *c2);
 bool ordenaCandidato2(Candidato* c1, Candidato *c2);
 

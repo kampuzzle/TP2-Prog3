@@ -7,13 +7,9 @@
 using namespace std;
 
 int main (int argc, char* argv[]) {
-    Diagnostico* diagnostico = new Diagnostico("15/11/2020");
-	diagnostico->le_arquivo_candidatos("candidatos.csv");
-    diagnostico->le_arquivo_partidos("partidos.csv");
-
-    /*Diagnostico* diagnostico = new Diagnostico(argv[3]);
+    Diagnostico* diagnostico = new Diagnostico(argv[3]);
 	diagnostico->le_arquivo_candidatos(argv[1]);
-    diagnostico->le_arquivo_partidos(argv[2]);*/
+    diagnostico->le_arquivo_partidos(argv[2]);
 
     diagnostico->set_partidos_candidatos();
     diagnostico->set_idades();

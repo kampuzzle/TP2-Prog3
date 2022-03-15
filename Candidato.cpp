@@ -1,12 +1,12 @@
 #include "Candidato.h"
 #include "Tokenizer.h"
 
-Candidato::Candidato(int numero, int votos_nominais,const string& situacao,const string& nome,const string& nome_urna, char sexo,const string& data_nasc,const string& destino_voto, int numero_partido){
+Candidato::Candidato(int numero, int votos_nominais,const string& situacao,string& nome,string& nome_urna, char sexo,const string& data_nasc,const string& destino_voto, int numero_partido){
     this->numero = numero;
 	this->votos_nominais = votos_nominais;
 	this->situacao = situacao;
-	this->nome = nome;
-	this->nome_urna = nome_urna;
+	this->nome = trim(nome);
+	this->nome_urna = trim(nome_urna);
 	this->sexo = sexo;
 	this->data_nasc = parseDate(data_nasc,DATE_FORMAT_PT_BR_SHORT);
 	this->destino_voto = destino_voto;
@@ -14,6 +14,7 @@ Candidato::Candidato(int numero, int votos_nominais,const string& situacao,const
 }
 
 int Candidato::eleito(){
+	//se o candidato foi eleito retorna 1, se nao, retorna 0
 	if(this->situacao.compare("Eleito") == 0){
 		return 1;
 	}
@@ -60,23 +61,23 @@ time_t Candidato::get_data_nasc()const{
 }
 
 int Candidato::age(int pd, int pm, int py,int bd, int bm, int by){
-	int m, y;
+	//calcula e retorna a idade do candidato
+	int y;
 	y = py - by;
 
 	if (pm < bm){
     	y--;
-    	m = 12 - (bm - pm);       
-  	} else{
-		m = pm - bm;
-  	}
-
-  	if (pd < bd){
-    	m--;
-  	}
+   
+  	} else if( pm == bm){
+		if (pd < bd){
+			y--;
+		}
+	}
   	return y;
 }
 
 void Candidato::calcula_idade(time_t dataEleicao){
+	//transforma as datas de time_t para strings, para a separacao e em seguida, o calculo da idade 
 	string dataNasc = formatDate(data_nasc,DATE_FORMAT_PT_BR_SHORT);
 	Tokenizer tok2(dataNasc, '/');
 	vector<string> nasc = tok2.remaining();
